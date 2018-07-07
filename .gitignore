@@ -5,7 +5,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Keys
+# Https keys
+https
 *.pem
 
 # Runtime data
