@@ -1,9 +1,13 @@
-// Application entry point
+/*
+ * Application entry point
+ *
+ */
 
 // Dependencies
 var http = require('http');
 var url = require('url');
 var StringDecoder = require('string_decoder').StringDecoder;
+var config = require('./config');
 
 // Create server
 var server = http.createServer(function(req, res) {
@@ -55,6 +59,7 @@ var server = http.createServer(function(req, res) {
             payloadString = JSON.stringify(resPayload);
 
             // Return response
+            res.setHeader('Content-Type', 'application-json');
             res.writeHead(statusCode);
             res.end(payloadString);
         });
@@ -64,8 +69,8 @@ var server = http.createServer(function(req, res) {
 });
 
 // Start server and listen on port 3000
-server.listen(3000, function() {
-    console.log("Server is listening on port 3000...");
+server.listen(config.port, function() {
+    console.log('Server is listening on port ' + config.port + ' in ' + config.envName + ' environment...');
 });
 
 // Define the handlers
