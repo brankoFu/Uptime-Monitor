@@ -95,9 +95,9 @@ var server = function(req, res) {
 // Define the handlers
 var handlers = {};
 
-// Sample handler
-handlers.sample = function(data, callback) {
-    callback(406, { 'name' : 'foo' });
+// Ping handler
+handlers.ping = function(data, callback) {
+    callback(200);
 };
 
 // Not Found handler
@@ -107,5 +107,5 @@ handlers.notFound = function(data, callback) {
 
 // Define the request router
 var router = {
-    'sample' : handlers.sample
+    'ping' : handlers.ping
 };
