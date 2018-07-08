@@ -8,9 +8,10 @@ var http = require('http');
 var https = require('https');
 var url = require('url');
 var StringDecoder = require('string_decoder').StringDecoder;
-var config = require('./config');
+var config = require('./lib/config');
 var fs = require('fs');
 var handlers = require('./lib/handlers');
+var helpers = require('./lib/helpers');
 
 // Create HTTP server
 var httpServer = http.createServer(function (req, res) {
@@ -48,6 +49,8 @@ var server = function (req, res) {
   // Get the query string as object
   var queryStringObject = parsedUrl.query;
 
+  console.log(queryStringObject);
+
   // Get the method
   var method = req.method.toLowerCase();
 
@@ -74,7 +77,7 @@ var server = function (req, res) {
       query: queryStringObject,
       method: method,
       headers: headers,
-      payload: buffer
+      payload: helpers.parseJsonToObject(buffer)
     }
 
     // Route request to choosen handler
@@ -95,5 +98,6 @@ var server = function (req, res) {
 
 // Define the request router
 var router = {
-  'ping': handlers.ping
+  ping: handlers.ping,
+  users: handlers.users
 };
